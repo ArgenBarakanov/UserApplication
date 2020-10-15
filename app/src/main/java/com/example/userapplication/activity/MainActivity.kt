@@ -20,16 +20,5 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
         binding.lifecycleOwner = this
         binding.mainActivityViewModel = viewModel
-
-        binding.button.setOnClickListener {
-            login()
-        }
     }
-
-    private fun login() {
-        viewModel.login(binding.loginInput.text.toString(), binding.editTextTextPassword.text.toString())
-        binding.loginInput.text?.clear()
-        binding.editTextTextPassword.text?.clear()
-    }
-
 }
