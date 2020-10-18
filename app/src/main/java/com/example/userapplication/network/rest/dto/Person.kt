@@ -1,6 +1,4 @@
-package com.example.userapplication.network.dto
-
-import com.squareup.moshi.Json
+package com.example.userapplication.network.rest.dto
 
 data class Person(
     val name: String,

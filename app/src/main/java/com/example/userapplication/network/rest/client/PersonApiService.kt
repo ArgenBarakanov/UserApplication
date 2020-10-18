@@ -1,11 +1,10 @@
-package com.example.userapplication.network
+package com.example.userapplication.network.rest.client
 
 
-import com.example.userapplication.network.dto.LoginDto
-import com.example.userapplication.network.dto.Person
+import com.example.userapplication.network.auth.dto.LoginDto
+import com.example.userapplication.network.rest.dto.Person
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import retrofit2.Response
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.Retrofit
 import retrofit2.http.Body
@@ -25,16 +24,14 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 
-interface MarsApiService {
+interface PersonApiService {
     @GET("all")
     suspend fun getProperties():
            List<Person>
-
-    @POST("login")
-    suspend fun authenticate(@Body loginDto: LoginDto):String
 }
 
-object MarsApi {
-    val retrofitService : MarsApiService by lazy {
-        retrofit.create(MarsApiService::class.java) }
+object PersonApi {
+    val retrofitService : PersonApiService by lazy {
+        retrofit.create(
+            PersonApiService::class.java) }
 }

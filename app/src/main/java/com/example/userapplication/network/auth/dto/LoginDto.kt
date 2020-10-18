@@ -1,4 +1,4 @@
-package com.example.userapplication.network.dto
+package com.example.userapplication.network.auth.dto
 
 data class LoginDto(
     var username: String,

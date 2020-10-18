@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.userapplication.R
 import com.example.userapplication.databinding.FragmentLoginBinding
 import com.example.userapplication.viewmodel.UserViewModel
@@ -21,6 +23,9 @@ class LoginFragment : Fragment() {
         binding.userViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         binding.button.setOnClickListener { authenticate() }
+        viewModel.authenticated.observe(viewLifecycleOwner, Observer {
+            this.view?.findNavController()?.navigate(R.id.action_loginFragment_to_galleryFragment)
+        })
         return binding.root
     }
 
