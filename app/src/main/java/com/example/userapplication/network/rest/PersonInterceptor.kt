@@ -7,6 +7,8 @@ import okhttp3.Response
 class PersonInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var request : Request = chain.request()
+        var response = chain.proceed(request)
+        return response
 
     }
 }
