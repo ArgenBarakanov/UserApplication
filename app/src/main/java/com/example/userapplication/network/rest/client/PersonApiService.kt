@@ -5,12 +5,13 @@ import com.example.userapplication.network.auth.dto.LoginDto
 import com.example.userapplication.network.rest.dto.Person
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.coroutines.Deferred
+import retrofit2.Call
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.Retrofit
-import retrofit2.http.Body
 
 import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.Header
 
 private const val BASE_URL =
     "http://192.168.0.31:8080/api/"
@@ -26,8 +27,8 @@ private val retrofit = Retrofit.Builder()
 
 interface PersonApiService {
     @GET("all")
-    suspend fun getProperties():
-           List<Person>
+     fun getProperties(@Header("Authorization") token: String):
+            Deferred<List<Person>>
 }
 
 object PersonApi {

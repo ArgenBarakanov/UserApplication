@@ -24,7 +24,7 @@ class LoginFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.button.setOnClickListener { authenticate() }
         viewModel.authenticated.observe(viewLifecycleOwner, Observer {
-            this.view?.findNavController()?.navigate(R.id.action_loginFragment_to_galleryFragment)
+            if(it)this.view?.findNavController()?.navigate(R.id.action_loginFragment_to_galleryFragment)
         })
         return binding.root
     }
