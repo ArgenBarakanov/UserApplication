@@ -35,8 +35,11 @@ class GalleryViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun getToken():String? {
-        return "Bearer " +getApplication<Application>().getSharedPreferences("USER_API_PREFERENCES", Context.MODE_PRIVATE).getString("ACCESS_TOKEN",null)
+        return getApplication<Application>().getSharedPreferences("USER_API_PREFERENCES", Context.MODE_PRIVATE).getString("ACCESS_TOKEN",null)
     }
 
-
+    override fun onCleared() {
+        super.onCleared()
+        coroutineScope.cancel()
+    }
 }

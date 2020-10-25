@@ -21,9 +21,8 @@ class UserViewModel (application: Application) : AndroidViewModel(application){
       coroutineScope.launch {
           try{
               val token: String =  AuthApi.retrofitService.authenticate(LoginDto(username,password))
-              Log.i("UserViewModel","Access Token is: " + token)
               val preferences : SharedPreferences = getApplication<Application>().getSharedPreferences("USER_API_PREFERENCES",Context.MODE_PRIVATE)
-              preferences.edit().putString("ACCESS_TOKEN",token).apply()
+              preferences.edit().putString("ACCESS_TOKEN", "Bearer $token").apply()
               authenticated.postValue(true)
           }catch (e:Exception){
               e.printStackTrace()
