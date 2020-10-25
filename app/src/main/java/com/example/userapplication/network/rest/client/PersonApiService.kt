@@ -3,6 +3,7 @@ package com.example.userapplication.network.rest.client
 
 import com.example.userapplication.network.auth.dto.LoginDto
 import com.example.userapplication.network.rest.dto.Person
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -22,13 +23,14 @@ private val moshi = Moshi.Builder()
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
+    .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .baseUrl(BASE_URL)
     .build()
 
 interface PersonApiService {
     @GET("all")
-     fun getProperties(@Header("Authorization") token: String):
-            Deferred<List<Person>>
+     suspend fun getProperties(@Header("Authorization") token: String):
+            List<Person>
 }
 
 object PersonApi {

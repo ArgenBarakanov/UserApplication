@@ -10,22 +10,29 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.userapplication.network.auth.client.AuthApi
 import com.example.userapplication.network.auth.dto.LoginDto
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class UserViewModel (application: Application) : AndroidViewModel(application){
+    var viewModelJob = Job()
+    val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.IO)
     var authenticated : MutableLiveData<Boolean> = MutableLiveData(false)
 
     fun authenticate(username:String, password:String) {
-      viewModelScope.launch {
+      coroutineScope.launch {
           try{
               val token: String =  AuthApi.retrofitService.authenticate(LoginDto(username,password))
               Log.i("UserViewModel","Access Token is: " + token)
               val preferences : SharedPreferences = getApplication<Application>().getSharedPreferences("USER_API_PREFERENCES",Context.MODE_PRIVATE)
               preferences.edit().putString("ACCESS_TOKEN",token).apply()
-              authenticated.value = true
+              authenticated.postValue(true)
           }catch (e:Exception){
-              Log.e("MainViewModel","Error is: " + e.message)
+              e.printStackTrace()
           }
       }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        coroutineScope.cancel()
     }
 }
