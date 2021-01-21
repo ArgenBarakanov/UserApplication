@@ -1,15 +1,11 @@
-package com.example.userapplication.viewmodel
+package com.example.userapplication.login
 
 import android.app.Application
-import android.content.Context
-import android.content.SharedPreferences
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.userapplication.network.auth.client.AuthApi
 import com.example.userapplication.network.auth.dto.LoginDto
+import com.example.userapplication.preferences.AppPreferences
 import kotlinx.coroutines.*
 
 class UserViewModel (application: Application) : AndroidViewModel(application){
@@ -21,8 +17,7 @@ class UserViewModel (application: Application) : AndroidViewModel(application){
       coroutineScope.launch {
           try{
               val token: String =  AuthApi.retrofitService.authenticate(LoginDto(username,password))
-              val preferences : SharedPreferences = getApplication<Application>().getSharedPreferences("USER_API_PREFERENCES",Context.MODE_PRIVATE)
-              preferences.edit().putString("ACCESS_TOKEN", "Bearer $token").apply()
+              AppPreferences.setAccessToken("Bearer $token")
               authenticated.postValue(true)
           }catch (e:Exception){
               e.printStackTrace()

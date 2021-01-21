@@ -1,4 +1,4 @@
-package com.example.userapplication.activity
+package com.example.userapplication.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.userapplication.R
 import com.example.userapplication.databinding.FragmentLoginBinding
-import com.example.userapplication.viewmodel.UserViewModel
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding

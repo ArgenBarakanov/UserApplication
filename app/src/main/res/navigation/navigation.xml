@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_gallery" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.userapplication.activity.LoginFragment"
+        android:name="com.example.userapplication.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action

@@ -19,24 +19,6 @@ class GalleryViewModel(application: Application) : AndroidViewModel(application)
     var persons: MutableLiveData<List<Person>> = MutableLiveData()
     var size: MutableLiveData<String> = MutableLiveData()
 
-    init {
-        coroutineScope.launch {
-            try{
-                println("Get Request from api")
-            val list = PersonApi.retrofitService.getProperties(getToken()!!)
-                println("Size is: " + list.size)
-                persons.postValue(list)
-                size.postValue("" + list.size)
-
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
-
-    fun getToken():String? {
-        return getApplication<Application>().getSharedPreferences("USER_API_PREFERENCES", Context.MODE_PRIVATE).getString("ACCESS_TOKEN",null)
-    }
 
     override fun onCleared() {
         super.onCleared()
