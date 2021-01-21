@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="galleryViewModel"
             type="com.example.userapplication.viewmodel.GalleryViewModel" />
     </data>
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity.GalleryFragment">
-
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+        
+        <fragment
+            android:id="@+id/minory_navigation"
+            app:navGraph="@navigation/minory_navigation"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@{galleryViewModel.size}" />
+            android:layout_height="match_parent"/>
 
-    </FrameLayout>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:elevation="4dp"
+            app:itemIconTint="@drawable/selector_bottom_nav"
+            app:itemTextColor="@drawable/selector_bottom_nav"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom" />
+
+    </RelativeLayout>
 </layout>
