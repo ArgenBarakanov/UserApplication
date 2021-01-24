@@ -2,16 +2,15 @@ package com.example.userapplication.catalog
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.userapplication.R
-import com.example.userapplication.TextItemViewHolder
-import com.example.userapplication.network.rest.dto.Person
+import com.example.userapplication.databinding.ProductItemBinding
+import com.example.userapplication.network.rest.dto.Category
 
-class CatalogAdapter: RecyclerView.Adapter<TextItemViewHolder>() {
+class CatalogAdapter: RecyclerView.Adapter<ProductItemViewHolder>() {
 
-    var data = listOf<Person>()
+    var data = listOf<Category>()
 
     set(value) {
         field = value
@@ -22,14 +21,14 @@ class CatalogAdapter: RecyclerView.Adapter<TextItemViewHolder>() {
         return data.size
     }
 
-    override fun onBindViewHolder(holder: TextItemViewHolder, position: Int) {
-        holder.view.text = data[position].name
+    override fun onBindViewHolder(holder: ProductItemViewHolder, position: Int) {
+         holder.productItemBinding?.product = data[position]
+        holder.productItemBinding?.executePendingBindings()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TextItemViewHolder {
-       val layout = LayoutInflater.from(parent.context)
-        val view = layout
-            .inflate(R.layout.product_item, parent, false) as TextView
-        return TextItemViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductItemViewHolder {
+       val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = DataBindingUtil.inflate<ProductItemBinding>(layoutInflater, R.layout.product_item,parent, false)
+        return ProductItemViewHolder(binding)
     }
 }
