@@ -1,13 +1,25 @@
 package com.example.userapplication.catalog
 
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.userapplication.databinding.ProductItemBinding
+import com.example.userapplication.databinding.CatalogItemBinding
+import com.example.userapplication.databinding.ProductChildItemBinding
 
-class ProductItemViewHolder(val binding: ProductItemBinding) : RecyclerView.ViewHolder(binding.root) {
-    var productItemBinding: ProductItemBinding?
+
+class CatalogItemViewHolder(val binding: CatalogItemBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+    var catalogItemBinding: CatalogItemBinding?
+
     init {
-        productItemBinding = binding
+        catalogItemBinding = binding
+    }
+}
+
+
+class ProductChildItemViewHolder(val binding: ProductChildItemBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+    var prodcutChildItemBinding: ProductChildItemBinding?
+
+    init {
+        prodcutChildItemBinding = binding
     }
 }

@@ -2,15 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
         <variable
             name="product"
             type="com.example.userapplication.network.rest.dto.Category" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -21,7 +21,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/products"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-    </LinearLayout>
+                android:layout_height="match_parent"
+                android:orientation="horizontal"/>
+    </RelativeLayout>
 
 </layout>
