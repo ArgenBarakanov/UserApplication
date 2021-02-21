@@ -8,7 +8,7 @@ import com.example.userapplication.R
 import com.example.userapplication.databinding.ProductChildItemBinding
 import com.example.userapplication.network.rest.dto.Product
 
-class ProductAdapter : RecyclerView.Adapter<ProductChildItemViewHolder>() {
+class ProductAdapter(val viewModel: CatalogViewModel) : RecyclerView.Adapter<ProductChildItemViewHolder>() {
 
     var products = listOf<Product>()
 
@@ -30,5 +30,8 @@ class ProductAdapter : RecyclerView.Adapter<ProductChildItemViewHolder>() {
     override fun onBindViewHolder(holder: ProductChildItemViewHolder, position: Int) {
         holder.prodcutChildItemBinding?.product = products[position]
         holder.binding.executePendingBindings()
+        holder.itemView.setOnClickListener{
+            viewModel.displaySelectedProduct(products[position])
+        }
     }
 }

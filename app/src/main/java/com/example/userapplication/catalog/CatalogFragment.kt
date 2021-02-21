@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.userapplication.R
 import com.example.userapplication.databinding.FragmentCatalogBinding
 
@@ -31,14 +32,18 @@ class CatalogFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_catalog, container, false)
-        val adapter = CatalogAdapter()
-        binding.catalogList.adapter = adapter
         viewModel = ViewModelProvider(this).get(CatalogViewModel::class.java)
+        val adapter = CatalogAdapter(viewModel)
+        binding.catalogList.adapter = adapter
         viewModel.fetchData()
-        viewModel.persons.observe(viewLifecycleOwner, Observer {
+        viewModel.categories.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.data = it
             }
+        })
+        viewModel.selectedProduct.observe(viewLifecycleOwner, Observer {
+           this.findNavController().navigate(CatalogFragmentDirections.showProduct(it))
+            viewModel.unSelectDisplayedProduct()
         })
         return binding.root
     }

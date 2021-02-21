@@ -14,13 +14,17 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:orientation="vertical">
-        
-        <fragment
-            android:id="@+id/minory_navigation"
-            app:navGraph="@navigation/minory_navigation"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+
+
+            <fragment
+                android:id="@+id/minory_navigation"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:navGraph="@navigation/minory_navigation"
+                android:layout_above="@id/bottom_navigation"/>
+
+
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"

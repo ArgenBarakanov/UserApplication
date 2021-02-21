@@ -7,9 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.userapplication.R
 import com.example.userapplication.databinding.CatalogItemBinding
 import com.example.userapplication.network.rest.dto.Category
-import kotlinx.android.synthetic.main.catalog_item.view.*
 
-class CatalogAdapter: RecyclerView.Adapter<CatalogItemViewHolder>() {
+class CatalogAdapter(val viewModel: CatalogViewModel): RecyclerView.Adapter<CatalogItemViewHolder>() {
 
     private val viewPool = RecyclerView.RecycledViewPool()
     var data = listOf<Category>()
@@ -25,9 +24,9 @@ class CatalogAdapter: RecyclerView.Adapter<CatalogItemViewHolder>() {
 
     override fun onBindViewHolder(holder: CatalogItemViewHolder, position: Int) {
          val catalogITem = data[position]
-         val productAdapter = ProductAdapter()
-        productAdapter.products = catalogITem.list
-        holder.catalogItemBinding?.product = catalogITem
+         val productAdapter = ProductAdapter(viewModel)
+        productAdapter.products = catalogITem.products
+        holder.catalogItemBinding?.catalog = catalogITem
         holder.catalogItemBinding?.products?.apply {
             adapter = productAdapter
             setRecycledViewPool(viewPool)

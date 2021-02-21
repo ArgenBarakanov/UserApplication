@@ -7,10 +7,17 @@
         name="catalog"
         type="com.example.userapplication.catalog.CatalogViewModel" />
 </data>
-
-<androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/catalogList"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+    android:layout_height="wrap_content">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/catalogList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </layout>
