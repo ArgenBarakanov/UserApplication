@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.userapplication.R
 import com.example.userapplication.databinding.ActivityMainBinding
 import com.example.userapplication.preferences.AppPreferences

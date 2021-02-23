@@ -28,10 +28,11 @@ class ProductAdapter(val viewModel: CatalogViewModel) : RecyclerView.Adapter<Pro
     }
 
     override fun onBindViewHolder(holder: ProductChildItemViewHolder, position: Int) {
-        holder.prodcutChildItemBinding?.product = products[position]
+        val product = products[position]
+        holder.prodcutChildItemBinding?.product = product
         holder.binding.executePendingBindings()
         holder.itemView.setOnClickListener{
-            viewModel.displaySelectedProduct(products[position])
+            viewModel.displaySelectedProduct(product)
         }
     }
 }

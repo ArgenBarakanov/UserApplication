@@ -24,7 +24,9 @@ private const val ARG_PARAM2 = "param2"
  */
 class CatalogFragment : Fragment() {
     private lateinit var binding: FragmentCatalogBinding
-    private lateinit var viewModel: CatalogViewModel
+    private val viewModel: CatalogViewModel by lazy {
+        ViewModelProvider(requireActivity()).get(CatalogViewModel::class.java)
+    }
 
 
     override fun onCreateView(
@@ -32,18 +34,19 @@ class CatalogFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_catalog, container, false)
-        viewModel = ViewModelProvider(this).get(CatalogViewModel::class.java)
         val adapter = CatalogAdapter(viewModel)
+        binding.lifecycleOwner = this
         binding.catalogList.adapter = adapter
-        viewModel.fetchData()
         viewModel.categories.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.data = it
             }
         })
         viewModel.selectedProduct.observe(viewLifecycleOwner, Observer {
-           this.findNavController().navigate(CatalogFragmentDirections.showProduct(it))
+            if(it != null) {
+           this.findNavController().navigate(CatalogFragmentDirections.actionCatalogFragmentToProductFragment(it))
             viewModel.unSelectDisplayedProduct()
+            }
         })
         return binding.root
     }

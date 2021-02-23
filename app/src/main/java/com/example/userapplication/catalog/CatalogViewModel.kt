@@ -17,7 +17,11 @@ class CatalogViewModel(application: Application) : AndroidViewModel(application)
 
     var selectedProduct: MutableLiveData<Product> = MutableLiveData();
 
-    fun fetchData() {
+    init {
+        fetchData()
+    }
+
+    private fun fetchData() {
         if (categories.value.isNullOrEmpty()) {
             coroutineScope.launch {
                 val data = PersonApi.retrofitService.getProperties()
